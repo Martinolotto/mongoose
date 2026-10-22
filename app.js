@@ -4,11 +4,14 @@ import express from "express";
 import { startDB } from "./src/config/database.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import "dotenv/config";
 
-// import { UserModel } from "./src/models/user.model.js";
 
 //routers
 import {userRouter} from './src/routes/user.routes.js';
+import { taskRouter } from "./src/routes/task.routes.js";
+import { roleRouter } from './src/routes/role.routes.js';
+
 
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -29,6 +32,9 @@ app.get("/", (req, res) => {
 
 //rutas
 app.use("/api", userRouter)
+app.use("/api", taskRouter);
+app.use("/api", roleRouter);
+
 
 const startServer = async () => {
   try {
